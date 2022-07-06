@@ -1,4 +1,4 @@
-FROM golang
+FROM golang as build
 
 WORKDIR /usr/src/app
 
@@ -7,6 +7,9 @@ COPY go.mod go.sum ./
 RUN go env -w GOPROXY='https://goproxy.cn,direct' && go mod download && go mod verify
 
 COPY . .
-RUN go build -v -o /usr/local/bin/app ./...
+RUN go build -v -o /usr/local/bin/app ./src/k8s_http
 
+###
+FROM golang as deploy
+COPY --from=build /usr/local/bin/app /usr/local/bin/app
 CMD ["app"]

@@ -1,4 +1,4 @@
-FROM golang as build
+FROM golang:alpine as build
 
 WORKDIR /usr/src/app
 
@@ -10,6 +10,6 @@ COPY . .
 RUN go build -v -o /usr/local/bin/app ./src/k8s_http
 
 ###
-FROM golang as deploy
+FROM golang:alpine as deploy
 COPY --from=build /usr/local/bin/app /usr/local/bin/app
 CMD ["app"]

@@ -9,12 +9,13 @@ import (
 )
 
 func test(w http.ResponseWriter, r *http.Request) {
+	t := time.Now().String()
 	host, _ := os.Hostname()
 	fmt.Println(time.Now())
 	uri := os.Getenv("URI")
 	acc := os.Getenv("ACCOUNT")
 	pass := os.Getenv("PASSWORD")
-	result := strings.Join([]string{host, uri, acc, pass}, "\n")
+	result := strings.Join([]string{host, uri, acc, pass, t}, "\n")
 	w.Write([]byte(result))
 }
 

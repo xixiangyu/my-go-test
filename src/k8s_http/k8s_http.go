@@ -18,10 +18,6 @@ func test(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(result))
 }
 
-func m() {
-
-}
-
 func main() {
 	http.HandleFunc("/test", test)
 	http.ListenAndServe("0.0.0.0:7788", nil)
